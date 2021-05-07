@@ -1,7 +1,53 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios'
 
 
-function Finalverification() {
+function Finalverification(props) {
+
+    const [name, setName] = useState('')
+    const [state, setState] = useState('')
+    const [city, setCity] = useState('')
+    const [constituency, setConstituency] = useState('')
+    const [age, setAge] = useState(0)
+    let voterinfo=[]
+
+    useEffect(()=>{
+        axios.get("/voterinfo",{
+            params:{
+                id:props.match.params.id
+            }
+        })
+        .then((res)=>{
+            console.log(res.data)
+            voterinfo.push(res.data)
+            setName(voterinfo[0].name)
+            setState(voterinfo[0].details.state)
+            setCity(voterinfo[0].details.city)
+            setConstituency(voterinfo[0].details.constituency)
+            setAge(voterinfo[0].details.age)
+
+        })
+    })
+    
+
+
+    const handleClick=(e)=>{
+        axios.get('/createblock',{
+          params:{
+            id:props.match.params.id,
+            partyName:props.match.params.partyName
+    
+          }
+          })
+        .then(()=>{
+          window.location ='/votings'
+        })
+    
+        e.preventDefault();
+        
+    
+    
+      }
 
     return (
         <div className='parties-section' >
@@ -15,16 +61,16 @@ function Finalverification() {
                         <tbody>
                             <tr>
                                 <td><h4>Voter ID </h4></td>
-                                <td>1234</td>
+                                <td>{props.match.params.id}</td>
 
                                 <td><h4>Voter Name</h4></td>
-                                <td>Trump</td>
+                                <td>{name}</td>
                                 <td><h4>Voter Gender </h4></td>
                                 <td>Male</td>
                                 <td><h4>Voter Age </h4></td>
-                                <td>70</td>
+                                <td>{age}</td>
                                 <td><h4>Voter Constituency ID</h4></td>
-                                <td>TN129</td>
+                                <td>{constituency}</td>
                                 <td><h4>Date</h4></td>
                                 <td>07/04/2021</td>
 
@@ -39,7 +85,7 @@ function Finalverification() {
                                 <td><h4>Candidate Age</h4></td>
                                 <td>50</td>
                                 <td><h4>Candidate Party</h4></td>
-                                <td>Google</td>
+                                <td>{props.match.params.partyname}</td>
 
 
                             </tr>
@@ -59,11 +105,7 @@ function Finalverification() {
     <h2>Please check the above details very carefully !!!</h2>
   </div>
   <h3 style={{color:'red'}} >This action is Irreversible</h3>
-  <button type='button' onClick={(e) => {
-                e.preventDefault();
-                window.confirm('Are you sure? This is the final chance');
-                window.location = "/votings";
-            }} className='ui inverted button primary huge' >Vote</button>
+  <button type='button' onClick={handleClick} className='ui inverted button primary huge' >Vote</button>
   </div>
 
             

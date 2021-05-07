@@ -1,7 +1,22 @@
 import React from 'react';
 import '../Card/Card.css';
+import axios from 'axios'
 
 function Card(props){
+
+  var id=props.id
+  console.log(id)
+
+  const handleClick=(e)=>{
+    
+    window.location ='/finalverification/'+props.id+"/"+props.partyName
+    
+
+    e.preventDefault();
+    
+
+
+  }
 
     return(
 //         <div className="inverted raised card">
@@ -30,9 +45,7 @@ function Card(props){
   
     <h1 className="header" style={{color:'white'}}>{props.politicianName} {props.partyName}</h1>
     <span className="right floated">
-      <button className='ui inverted button primary' type='button' onClick={(e) => {
-                                e.preventDefault();
-                                window.location ='/'+props.partyName }} >Vote</button>
+      <button className='ui inverted button primary' type='button' onClick={handleClick} >Vote</button>
     </span>
   </div>
 </div>

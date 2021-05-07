@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { base } = require("../models/medicalrecord");
+
 
 const generate_keys = () => {
     const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {

@@ -12,9 +12,9 @@ function App() {
 
     <Router>
     <Switch>
-      <Route exact path='/voterhome/:id' render={ (props) => <Voterhome></Voterhome>}/>
-      <Route exact path='/parties' render={ (props) => <Parties></Parties>}/>
-      <Route exact path='/finalverification' render={ (props) => <Finalverification></Finalverification>}/>
+      <Route exact path='/voterhome/:id' render={ (props) => <Voterhome {...props} />}/>
+      <Route exact path='/parties/:id' render={ (props) => <Parties   {...props}/>}/>
+      <Route exact path='/finalverification/:id/:partyname' render={ (props) => <Finalverification {...props}/>}/>
       <Route exact path='/votings' render={ (props) => <Votings></Votings>}/>
       <Route exact path='/mykeys' render={ (props) => <Mykeys></Mykeys>}/>
 
