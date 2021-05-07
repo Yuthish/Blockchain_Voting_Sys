@@ -21,7 +21,7 @@ function Voting() {
         <td style={{ fontSize: '17px' }}>{x.updatedAt}</td>
         <td style={{ fontSize: '17px' }}>{x.vote.slice(0,20)}</td>
         <td style={{ fontSize: '17px' }}>{x.size}</td>
-        <td style={{ fontSize: '17px' }}>{x.partyName}</td>
+        <td style={{ fontSize: '17px' }}>{x.party}</td>
 
         </tr>
         )

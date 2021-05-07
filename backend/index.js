@@ -31,6 +31,9 @@ app.get('/',function(req,res){
     res.send("HI")
 })
 
+var keys={};
+var votesig;
+
 app.get("/voterinfo",function(req,res){
     var id=req.query.id
     console.log(id)
@@ -40,8 +43,21 @@ app.get("/voterinfo",function(req,res){
     
     User.findOne({ID:id})
     .then(user=>{console.log(user)
+        keys.publicKey=user.public_key
+        keys.privateKey=user.private_key
         res.json(user)})
     .catch(err=>{console.log(err)})
+})
+
+app.get("/createdigsig",function(req,res){
+    var partyname=req.query.partyName;
+    let JSONdata={}
+    JSONdata.partyName=partyname
+    let pvtkey=keys.privateKey
+    votesign=dig_sig.create_signature(JSONdata, pvtkey).toString('base64')
+    console.log("votesign",votesign)
+    res.json(votesign)
+
 })
 
 app.get("/createblock",function(req,res){
@@ -51,7 +67,7 @@ app.get("/createblock",function(req,res){
     let JSONdata={}
     JSONdata.partyName=partyName
     let block={}
-    let pvtkey=dig_sig.generate_keys().privateKey
+    let pvtkey=keys.privateKey
     block.vote=dig_sig.create_signature(JSONdata, pvtkey).toString('base64')
     block.party=partyName;
     Block.findOne({}, {}, { sort: { 'created_at' : -1 } })

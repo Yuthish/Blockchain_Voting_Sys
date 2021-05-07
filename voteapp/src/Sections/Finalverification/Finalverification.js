@@ -10,8 +10,17 @@ function Finalverification(props) {
     const [constituency, setConstituency] = useState('')
     const [age, setAge] = useState(0)
     let voterinfo=[]
+    const [digsign, setDigsign] = useState('')
 
     useEffect(()=>{
+        axios.get("/createdigsig",{
+            params:{
+                partyName:props.match.params.partyName
+        }})
+        .then(res=>{
+            console.log(res.data)
+            setDigsign(res.data.slice(0,100))
+        })
         axios.get("/voterinfo",{
             params:{
                 id:props.match.params.id
@@ -27,7 +36,7 @@ function Finalverification(props) {
             setAge(voterinfo[0].details.age)
 
         })
-    })
+    },[])
     
 
 
@@ -35,14 +44,14 @@ function Finalverification(props) {
         axios.get('/createblock',{
           params:{
             id:props.match.params.id,
-            partyName:props.match.params.partyName
+            partyName:props.match.params.partyname
     
           }
           })
         .then(()=>{
           window.location ='/votings'
         })
-    
+        window.location ='/votings'
         e.preventDefault();
         
     
@@ -97,7 +106,7 @@ function Finalverification(props) {
             <br></br>
             <h1>Digital Signature Created</h1>
             <br></br>
-            <h2>0ba0865fb3dedc1c8c31c2d66ed96a74d254374b3a1ca0b02e69e23b7450cb57</h2>
+            <h2>{digsign}</h2>
             <br></br>
 <div class="ui inverted  message">
   

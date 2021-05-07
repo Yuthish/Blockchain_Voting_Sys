@@ -16,7 +16,7 @@ function App() {
       <Route exact path='/parties/:id' render={ (props) => <Parties   {...props}/>}/>
       <Route exact path='/finalverification/:id/:partyname' render={ (props) => <Finalverification {...props}/>}/>
       <Route exact path='/votings' render={ (props) => <Votings></Votings>}/>
-      <Route exact path='/mykeys' render={ (props) => <Mykeys></Mykeys>}/>
+      <Route exact path='/mykeys/:id' render={ (props) => <Mykeys {...props}/>}/>
 
     </Switch>
 

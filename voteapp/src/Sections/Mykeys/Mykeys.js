@@ -1,7 +1,25 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import '../Mykeys/Mykeys.css';
+import axios from 'axios'
+function Mykeys(props) {
+    const [pvtKey, setPvtKey] = useState('')
+    const [pubKey, setPubKey] = useState('')
 
-function Mykeys() {
+    useEffect(() => {
+        axios.get("/voterinfo",{
+            params:{
+                id:props.match.params.id
+            }
+        })
+        .then(res=>{
+            setPubKey(res.data.public_key.slice(50,250))
+            setPvtKey(res.data.private_key.slice(25,250))
+
+        })
+        
+        
+    }, [])
+
 
     return (
     
@@ -12,11 +30,11 @@ function Mykeys() {
         <div style={{ color: 'white' }} class=" ui inverted segment">
      
             <h1  class="ui header">Public Key</h1>
-            <h2>fcb9b7cba3ba0b63bb780438f5c67c32ab670c9b1a936fc6b3a440147f2b0b35</h2>
+            <h2>{pubKey}</h2>
             
             <div class="ui hidden divider"></div>
             <h1 class="ui header">Private Key </h1>
-            <h2>fcb9b7cba3ba0b63bb780438f5c67c32ab670c9b1a936fc6b3a440147f2b0b35</h2>
+            <h2>{pvtKey}</h2>
             <br></br>
             
         </div>
