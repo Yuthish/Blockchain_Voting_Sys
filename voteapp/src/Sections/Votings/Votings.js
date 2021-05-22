@@ -1,10 +1,10 @@
 import React from 'react';
 import Voting from '../../Components/Voting/Voting';
 
-function Votings(){
+function Votings(props){
 
     return(
-        <Voting></Voting>
+        <Voting id={props.match.params.id}></Voting>
     )
 };
 

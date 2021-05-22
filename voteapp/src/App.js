@@ -14,9 +14,9 @@ function App() {
     <Switch>
       <Route exact path='/voterhome/:id' render={ (props) => <Voterhome {...props} />}/>
       <Route exact path='/parties/:id' render={ (props) => <Parties   {...props}/>}/>
-      <Route exact path='/finalverification/:id/:partyname' render={ (props) => <Finalverification {...props}/>}/>
-      <Route exact path='/votings' render={ (props) => <Votings></Votings>}/>
-      <Route exact path='/mykeys/:id' render={ (props) => <Mykeys {...props}/>}/>
+      <Route exact path='/finalverification/:id/:partyname/:politicianname' render={ (props) => <Finalverification {...props}/>}/>
+      <Route exact path='/votings/:id' render={ (props) => <Votings {...props}/>}/>
+      {/* <Route exact path='/mykeys/:id' render={ (props) => <Mykeys {...props}/>}/> */}
 
     </Switch>
 
