@@ -68,13 +68,15 @@ app.get("/createblock",function(req,res){
     JSONdata.partyName=partyName
     let block={}
     let pvtkey=keys.privateKey
-    block.vote=dig_sig.create_signature(JSONdata, pvtkey).toString('base64')
+    block.vote=votesign
     block.party=partyName;
     Block.findOne({}, {}, { sort: { 'created_at' : -1 } })
     .then(prevBlock=>{
         console.log(prevBlock)
         block.prev_hash="jenjewbfjewbkjb"
+        block['publickey']=req.query.publickey
         block['hash'] = hasher.hash_block(JSON.stringify(block));
+    
         block['size'] = JSON.stringify(block).length+4;
          Block.create(block)
          .then(thisBlock=>{

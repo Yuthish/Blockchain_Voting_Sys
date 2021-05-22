@@ -11,11 +11,11 @@ const sidebardata=[
         path:"/myinfo/"+2,
         cName:'nav-text'
     },
-    {
-        title:"My Keys",
-        path:"/mykeys",
-        cName:'nav-text'
-    },
+    // {
+    //     title:"My Keys",
+    //     path:"/mykeys",
+    //     cName:'nav-text'
+    // },
     {
         title:"Settings",
         path:"/settings",

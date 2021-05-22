@@ -12,7 +12,7 @@ function Mykeys(props) {
             }
         })
         .then(res=>{
-            setPubKey(res.data.public_key.slice(50,250))
+            setPubKey(res.data.public_key)
             setPvtKey(res.data.private_key.slice(25,250))
 
         })

@@ -8,6 +8,7 @@ const blockschema = mongoose.Schema({
     vote:String,
     size:Number,
     party:String,
+    publickey:String,
 }, {timestamps:true});
 
 

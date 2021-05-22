@@ -9,7 +9,7 @@ function Card(props){
 
   const handleClick=(e)=>{
     
-    window.location ='/finalverification/'+props.id+"/"+props.partyName
+    window.location ='/finalverification/'+props.id+"/"+props.partyName+"/"+props.politicianName
     
 
     e.preventDefault();
@@ -43,7 +43,7 @@ function Card(props){
   </div>
   <div className="content">
   
-    <h1 className="header" style={{color:'white'}}>{props.politicianName} {props.partyName}</h1>
+    <h1 className="header" style={{color:'white'}}>{props.politicianName} | {props.partyName}</h1>
     <span className="right floated">
       <button className='ui inverted button primary' type='button' onClick={handleClick} >Vote</button>
     </span>

@@ -11,6 +11,7 @@ function Finalverification(props) {
     const [age, setAge] = useState(0)
     let voterinfo=[]
     const [digsign, setDigsign] = useState('')
+    const [pubKey, setPubKey] = useState('')
 
     useEffect(()=>{
         axios.get("/createdigsig",{
@@ -34,6 +35,7 @@ function Finalverification(props) {
             setCity(voterinfo[0].details.city)
             setConstituency(voterinfo[0].details.constituency)
             setAge(voterinfo[0].details.age)
+            setPubKey(voterinfo[0].public_key)
 
         })
     },[])
@@ -44,14 +46,15 @@ function Finalverification(props) {
         axios.get('/createblock',{
           params:{
             id:props.match.params.id,
-            partyName:props.match.params.partyname
+            partyName:props.match.params.partyname,
+            publickey:pubKey
     
           }
           })
         .then(()=>{
           window.location ='/votings'
         })
-        window.location ='/votings'
+        window.location ='/votings/'+props.match.params.id
         e.preventDefault();
         
     
@@ -88,7 +91,7 @@ function Finalverification(props) {
                                 <td><h4>Candidate ID</h4></td>
                                 <td>1258</td>
                                 <td><h4>Candidate Name</h4></td>
-                                <td>Sundar</td>
+                                <td>{props.match.params.politicianname}</td>
                                 <td><h4>Candidate Gender</h4></td>
                                 <td>Male</td>
                                 <td><h4>Candidate Age</h4></td>
@@ -104,9 +107,15 @@ function Finalverification(props) {
                 </div>
             </div>
             <br></br>
+            <h1>Please note your public key for future reference.</h1>
+            <br></br>
+            <h2><a href="#">{pubKey}</a></h2>
+            <br></br>
+            <hr></hr>
             <h1>Digital Signature Created</h1>
             <br></br>
             <h2>{digsign}</h2>
+
             <br></br>
 <div class="ui inverted  message">
   
